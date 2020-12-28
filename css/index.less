@@ -8,6 +8,14 @@
     height: 1rem;
     background-color: #ddd;
 }
+li {
+    list-style: none;
+}
+// 声明图标官字体
+@font-face {
+    font-family: "electronicFont";
+    src: url(../font/DS-DIGIT.TTF);
+}
 body {
     background: url(../images/bg.jpg) no-repeat top center;     /* 是否及如何重复背景图像  定位区域 位置 */
     line-height: 1.15;
@@ -35,18 +43,100 @@ header {
 .mainbox {
     display: flex;
     min-width: 1024px;
-    max-width: 1902px;
+    max-width: 1920px;
     margin: 0 auto;
-    padding: .125rem .125rem 0;
+    padding: 0.125rem 0.125rem 0;
     .column {
         flex: 3;
-        background-color: red;
     }
     .column:nth-child(2) {
         flex: 5;
+        margin: 0 0.125rem 0.1875rem;
     }
     .panel {
+        position: relative;
         height: 3.875rem;
+        padding: 0 0.1875rem 0.5rem;
         border: 1px solid rgba(25, 186, 139, 0.17);
+        background: url(../images/line\(1\).png) rgba(255, 255, 255, 0.04);
+        // 四个角: 伪类实现
+        &::before {
+            // 左上
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid #02a6b5;
+            border-top: 2px solid #02a6b5;
+            content: "";
+        }
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #02a6b5;
+            border-top: 2px solid #02a6b5;
+            content: "";
+        }
+        .panel-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            &::before {
+                // 左上
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 10px;
+                height: 10px;
+                border-left: 2px solid #02a6b5;
+                border-bottom: 2px solid #02a6b5;
+                content: "";
+            }
+            &::after {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 10px;
+                height: 10px;
+                border-right: 2px solid #02a6b5;
+                border-bottom: 2px solid #02a6b5;
+                content: "";
+            }
+        }
+            h2 {
+        height: 0.6rem;
+        color: #fff;
+        line-height: 0.6rem;
+        text-align: center;
+        font-size: 0.25rem;
+        font-weight: 400;
+    }
+    .chart {
+        height: 3rem;
+        background-color: pink;
+    }
+    }
+}
+.no {
+    background: rgba(101, 132, 226, 0.1);
+    padding: .1875rem;
+    .no-hd {
+        border: 1px solid rgba(25, 186, 139, 0.17);
+        ul {
+            display: flex;
+            li {
+                flex: 1;
+                line-height: 1rem;
+                font-size: 0.875rem;
+                color: #ffeb7b;
+                text-align: center; 
+                font-family: "electronicFont";
+            }
+        }
     }
 }
