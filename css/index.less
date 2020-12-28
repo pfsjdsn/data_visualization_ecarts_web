@@ -33,7 +33,20 @@ header {
     }
 }
 .mainbox {
+    display: flex;
     min-width: 1024px;
     max-width: 1902px;
     margin: 0 auto;
+    padding: .125rem .125rem 0;
+    .column {
+        flex: 3;
+        background-color: red;
+    }
+    .column:nth-child(2) {
+        flex: 5;
+    }
+    .panel {
+        height: 3.875rem;
+        border: 1px solid rgba(25, 186, 139, 0.17);
+    }
 }
