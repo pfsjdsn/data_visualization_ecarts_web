@@ -92,6 +92,7 @@ window.addEventListener("resize", function() {
 (function(){
   // 实例化对象
   var myChart = echarts.init(document.querySelector(".bar2 .chart"));
+  var myColor = ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"];
   // 指定配置和数据
   var option = {
     grid: {
@@ -106,7 +107,7 @@ window.addEventListener("resize", function() {
     },
     yAxis: {
         type: 'category',
-        data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口(万)'],
+        data: [ '印尼', '美国', '印度', '中国', '世界人口(万)'],
 		// 不显示y轴的线
 		axisLabel: {
 			show: false
@@ -124,10 +125,16 @@ window.addEventListener("resize", function() {
         {
             name: '条',
             type: 'bar',
-            data: [18203, 23489, 29034, 104970, 131744, 630230],
+            data: [18203, 23489, 29034, 104970, 131744],
 			// 修改第一组柱子的圆角
 			itemStyle: {
-				barBorderRadius: 20
+				barBorderRadius: 20,
+			// 修改柱子的颜色
+			color: function(params) {
+				// params 是柱子的对象
+				// dataIndex 是柱子的索引
+				return myColor[params.dataIndex];
+			}
 			},
 			// 柱子之间的距离
 			barCategoryGap: 50,
