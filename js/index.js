@@ -194,11 +194,14 @@
 	var myChart = echarts.init(document.querySelector(".line .chart"))
 	// 指定配置
 	var option = {
+		// 设置线条颜色
+		color: ['#00f2f1', '#ed3f35'],
 		tooltip: {
 			trigger: 'axis'
 		},
 		legend: {
-			data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'],
+			// data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'],
+			// 如果series有name值，则legend可以不用写data，效果是一样显示的
 			textStyle: {
 				color: "#4c9bfd"
 			},
@@ -222,14 +225,16 @@
 		xAxis: {
 			type: 'category',
 			boundaryGap: false, // 去除轴内间距
-			data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+			data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
 			axisTick: {
 				show: false // 去除刻度线
 			},
 			axisLabel: {
-				color: '#4c9bfd' // 文本颜色
+				color: '#4c9bfd', // 文本颜色
+				interval:0, // 强制设置坐标轴分割间隔,可全部显示x轴数据
+				rotate:45
 			},
-			axisLine: {
+			axisLine: {	
 				show: false // 去除轴线
 			},
 		},
@@ -251,19 +256,27 @@
 			}
 		},
 		series: [{
-				name: '邮件营销',
+				name: '新增粉丝',
 				type: 'line',
 				stack: '总量',
-				data: [120, 132, 101, 134, 90, 230, 210]
+				// 让线条有弧度
+				smooth: true,
+				data:  [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
 			},
 			{
-				name: '联盟广告',
+				name: '新增游客',
 				type: 'line',
 				stack: '总量',
-				data: [220, 182, 191, 234, 290, 330, 310]
+				// 让线条有弧度
+				smooth: true,
+				data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79], 
 			}
 		]
 	};
 	// 把配置给实例对象
 	myChart.setOption(option);
+	// 图表适配页面
+	window.addEventListener("resize", function () {
+		myChart.resize();
+	})
 })();
