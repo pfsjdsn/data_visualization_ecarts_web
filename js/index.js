@@ -190,6 +190,22 @@
 })();
 // 折线图1模块
 (function () {
+	var yearData = [
+		{
+		  year: '2020',  // 年份
+		  data: [  // 两个数组是因为有两条线
+			   [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+			   [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79]
+			]
+		},
+		{
+		  year: '2021',  // 年份
+		  data: [  // 两个数组是因为有两条线
+			   [123, 175, 112, 197, 121, 67, 98, 21, 43, 64, 76, 38],
+			   [143, 131, 165, 123, 178, 21, 82, 64, 43, 60, 19, 34]
+			]
+		}
+	];
 	// 实例化对象
 	var myChart = echarts.init(document.querySelector(".line .chart"))
 	// 指定配置
@@ -261,7 +277,7 @@
 				stack: '总量',
 				// 让线条有弧度
 				smooth: true,
-				data:  [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+				data:  yearData[0].data[0],
 			},
 			{
 				name: '新增游客',
@@ -269,14 +285,76 @@
 				stack: '总量',
 				// 让线条有弧度
 				smooth: true,
-				data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79], 
+				data: yearData[0].data[1], 
 			}
 		]
 	};
 	// 把配置给实例对象
 	myChart.setOption(option);
 	// 图表适配页面
-	window.addEventListener("resize", function () {
+	window.addEventListener("resize", function () { 
 		myChart.resize();
+	});
+	// 点击切换效果
+	$(".line h2").on("click", "a", function() {
+		// 点击a后，根据a的索引号找到对应的yearData相关对象
+		var obj = yearData[$(this).index()];
+		option.series[0].data = obj.data[0];
+		option.series[1].data = obj.data[1];
+		// 重新渲染
+		myChart.setOption(option);
 	})
+})();
+// 折线图2模块
+(function() {
+	var myChart = echarts.init(document.querySelector('.line2 .chart'));
+	var option = {
+		tooltip: {
+			trigger: 'axis',
+		},
+		legend: {
+			data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true
+		},
+		xAxis: [
+			{
+				type: 'category',
+				boundaryGap: false,
+				data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+			}
+		],
+		yAxis: [
+			{
+				type: 'value'
+			}
+		],
+		series: [
+			{
+				name: '邮件营销',
+				type: 'line',
+				stack: '总量',
+				areaStyle: {},
+				emphasis: {
+					focus: 'series'
+				},
+				data: [120, 132, 101, 134, 90, 230, 210]
+			},
+			{
+				name: '联盟广告',
+				type: 'line',
+				stack: '总量',
+				areaStyle: {},
+				emphasis: {
+					focus: 'series'
+				},
+				data: [220, 182, 191, 234, 290, 330, 310]
+			}
+		]
+	};
+	myChart.setOption(option);
 })();
